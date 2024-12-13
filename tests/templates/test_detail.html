@@ -1,0 +1,8 @@
+<h1>{{ test.title }}</h1>
+<p>{{ test.description }}</p>
+<form method="post">
+    {% csrf_token %}
+    <br><br>
+    {{ form.as_p }}
+    <button type="submit">Отправить</button>
+</form>
