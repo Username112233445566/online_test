@@ -1,0 +1,36 @@
+name: SonarQube Analysis
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - umar
+
+jobs:
+  sonarqube:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+
+      - name: Install dependencies using Poetry
+        run: |
+          poetry install
+
+      - name: Run SonarQube analysis
+        env:
+          SONAR_TOKEN: ffce3df50218e703007ae805ded4ff3069544766
+        run: |
+          sonar-scanner
